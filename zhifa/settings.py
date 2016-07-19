@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'zhifa.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'zhifa',
+        'USER': 'root',
+        'PASSWORD': 'lyj5654582',
+        'HOST': '121.42.210.194',
+        'PORT': '',
     }
 }
 

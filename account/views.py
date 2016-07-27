@@ -34,7 +34,6 @@ def login(request):
     :return: "success": valid usn and pwd
               "user not exist": no matching usn
               "wrong password": invalid pwd
-              "No such role":
     """
     req = json.loads(request.body)
     usn = req['username']
@@ -42,12 +41,14 @@ def login(request):
     role = req['role']
     if cmp(role, 'Customer') == 0:
         user = Customer.objects.filter(username=usn)
-        return HttpResponse(validateLogin(user, pwd))
+        if user.count() != 0:
+            return HttpResponse(validateLogin(user[0], pwd))
     elif cmp(role, 'Barber') == 0:
         user = Barber.objects.filter(username=usn)
-        return HttpResponse(validateLogin(user, pwd))
-    else:
-        return HttpResponse("No such role")
+        if user.count() != 0:
+            return HttpResponse(validateLogin(user[0], pwd))
+
+    return HttpResponse("user not exist")
 
 
 def test(request):

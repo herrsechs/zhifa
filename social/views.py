@@ -31,3 +31,41 @@ def follow(request):
     c.save()
 
     return HttpResponse("follow successfully")
+
+
+def follow_list(request):
+    """
+    Get customer's follow list
+    :param request:
+            JSON string
+            cid: Customer ID
+    :return:
+            JSON string
+            [
+                {
+                    "username":
+                    "gender":
+                }
+            ]
+    """
+    req = json.loads(request.body)
+    cid = req['cid']
+    qs_customer = Customer.objects.filter(id=cid)
+    if qs_customer.count() == 0:
+        return HttpResponse("customer " + cid + " not exist")
+    c = qs_customer[0]
+
+    qs_barber = c.followed_barbers.all()
+    if qs_barber.count() == 0:
+        return HttpResponse("no followed barber")
+    ls_barber = []
+
+    for b in qs_barber:
+        dic_barber = dict()
+        dic_barber["username"] = b.username
+        dic_barber["gender"] = b.gender
+        ls_barber.append(dic_barber.copy())
+
+    jstring = json.dumps(ls_barber)
+    return HttpResponse(jstring)
+

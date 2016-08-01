@@ -69,3 +69,14 @@ def follow_list(request):
     jstring = json.dumps(ls_barber)
     return HttpResponse(jstring)
 
+
+def comment(request):
+    """
+    Customer leaves a comment to an image
+    :param request: JSON string
+                    cid: Customer ID
+                    date: Comment date
+                    txt:
+    :return:
+    """
+

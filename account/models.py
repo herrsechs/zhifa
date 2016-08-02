@@ -12,8 +12,6 @@ class Barber(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
     gender = models.CharField(max_length=1, choices=genders)
-    hairImgs = models.ManyToManyField(img_models.HairImg)
-    headImgs = models.ManyToManyField(img_models.HeadImg)
 
 
 # Create your models here.
@@ -22,9 +20,7 @@ class Customer(models.Model):
     password = models.CharField(max_length=20)
     gender = models.CharField(max_length=1, choices=genders)
     followed_barbers = models.ManyToManyField(Barber)
-    hairImgs = models.ManyToManyField(img_models.HairImg)
-    selfieImgs = models.ManyToManyField(img_models.SelfieImg)
-    headImgs = models.ManyToManyField(img_models.HeadImg)
+
 
 
 

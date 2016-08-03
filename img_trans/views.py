@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
 from models import HairImg
+import logging as log
 # Create your views here.
 
 
 class ImgForm(forms.Form):
-    bid = forms.CharField()
-    img = forms.FileField()
+    bid = forms.CharField(label='barber_id')
+    img = forms.FileField(label='hair_img')
 
 
 def index(request):
@@ -22,7 +23,14 @@ def upload_hair_img(request):
                 {file} hair_img
     :return:
     """
-    form = ImgForm(request.POST, request.FILES)
+    logger = log.getLogger('django')
+    # logger.info(request.POST)
+    # logger.info(request.FILES.getlist('hair_img')[0])
+
+    form = ImgForm({'id_bid': request.POST['barber_id'], 'id_img': request.FILES.getlist('hair_img')[0]})
+    logger.info(form.errors)
+    if not form.is_bound:
+        return HttpResponse("Not bound")
     if form.is_valid():
         bid = form.cleaned_data['bid']
         img = form.cleaned_data['img']

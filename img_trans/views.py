@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django import forms
 from models import HairImg
 import logging as log
@@ -8,7 +9,7 @@ import logging as log
 
 class ImgForm(forms.Form):
     bid = forms.CharField(label='barber_id')
-    img = forms.FileField(label='hair_img')
+    img = forms.ImageField(label='hair_img')
 
 
 def index(request):
@@ -27,16 +28,21 @@ def upload_hair_img(request):
     # logger.info(request.POST)
     # logger.info(request.FILES.getlist('hair_img')[0])
 
-    form = ImgForm({'id_bid': request.POST['barber_id'], 'id_img': request.FILES.getlist('hair_img')[0]})
-    logger.info(form.errors)
-    if not form.is_bound:
-        return HttpResponse("Not bound")
-    if form.is_valid():
-        bid = form.cleaned_data['bid']
-        img = form.cleaned_data['img']
-        hi = HairImg(barber=bid, img=img, favor_count=0)
-        hi.save()
-    else:
-        return HttpResponse("Upload failed")
+    bid = request.POST['barber_id']
+    img = request.FILES.getlist('hair_img')[0]
+    hi = HairImg(bid=bid, img=img, favor_count=0)
+    hi.save()
+    logger.debug(hi)
+    #form = ImgForm({'bid': request.POST['barber_id']}, {'img': SimpleUploadedFile('fol.jpg', request.FILES.getlist('hair_img')[0])})
+    #logger.info(form.errors)
+    #if not form.is_bound:
+    #    return HttpResponse("Not bound")
+    #if form.is_valid():
+    #    bid = form.cleaned_data['bid']
+    #    img = form.cleaned_data['img']
+    #    hi = HairImg(barber=bid, img=img, favor_count=0)
+    #    hi.save()
+    #else:
+    #    return HttpResponse("Upload failed")
 
     return HttpResponse("Upload successfully")

@@ -9,11 +9,14 @@ class HairImg(models.Model):
 
 
 class HeadImg(models.Model):
-    location = models.CharField(max_length=100)
+    user_id = models.CharField(max_length=20)
+    img = models.FileField(upload_to='/home/clouddata/img/headimg/', default=None)
+    role = models.CharField(max_length=20)
 
 
 class SelfieImg(models.Model):
-    location = models.CharField(max_length=100)
+    cid = models.CharField(max_length=20)
+    img = models.FileField(upload_to='/home/clouddata/img/selfie', default=None)
 
 
 

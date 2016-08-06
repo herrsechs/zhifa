@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from account.models import Customer, Barber
+from social.models import Comment
 import json
+import logging as log
 # Create your views here.
 
 
@@ -74,9 +76,46 @@ def comment(request):
     """
     Customer leaves a comment to an image
     :param request: JSON string
-                    cid: Customer ID
-                    date: Comment date
-                    txt:
+                    {string} cid: Customer ID
+                    {string} date: Comment date
+                    {string} txt:
+                    {string} pid: picture id
     :return:
     """
+    req = json.loads(request.body)
+    cid = req['cid']
+    date = req['date']
+    txt = req['txt']
+    pid = req['pid']
+
+    try:
+        c = Comment(cid=cid, date=date, text=txt, img_id=pid)
+        c.save()
+    except Exception as e:
+        logger = log.getLogger('django')
+        logger.error(e)
+        return HttpResponse("Fail to comment")
+
+    return HttpResponse("Comment successfully")
+
+
+def get_img_comment(request):
+    """
+    TO-BE-COMPLETED
+    Get comment list of an image
+    :param request:
+    :return:
+    """
+    req = json.loads(request.body)
+    img_id = req['pid']
+
+    comments = []
+    qs_comment = Comment.objects.filter(img_id=img_id)
+    for c in qs_comment:
+        c_dict = dict()
+        c_dict['text'] = c.text
+        qs_customer = Customer.objects.filter(id=c.cid)
+        cname = qs_customer[0]
+        c_dict['']
+        comments.append()
 

@@ -81,6 +81,8 @@ def comment(request):
                     {string} txt:
                     {string} pid: picture id
     :return:
+            HttpResponse('Fail to comment'): when fail to save info
+            HttpResponse('Comment successfully')
     """
     req = json.loads(request.body)
     cid = req['cid']
@@ -103,7 +105,8 @@ def get_img_comment(request):
     """
     TO-BE-COMPLETED
     Get comment list of an image
-    :param request:
+    :param request: JSON string:
+                {string} pid
     :return:
     """
     req = json.loads(request.body)
@@ -114,8 +117,12 @@ def get_img_comment(request):
     for c in qs_comment:
         c_dict = dict()
         c_dict['text'] = c.text
+        c_dict['date'] = c.date
         qs_customer = Customer.objects.filter(id=c.cid)
-        cname = qs_customer[0]
-        c_dict['']
-        comments.append()
+        customer = qs_customer[0]
+        c_dict['username'] = customer.username
+        comments.append(c_dict)
+
+    jstring = json.dumps(comments)
+    return HttpResponse(jstring)
 

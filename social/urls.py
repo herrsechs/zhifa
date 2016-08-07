@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     url(r'^follow/.*$', views.follow, name='follow'),
     url(r'^followList/.*$', views.follow_list, name='follow_list'),
-    url(r'^comment/.*$', views.comment, name='comment')
+    url(r'^comment/.*$', views.comment, name='comment'),
+    url(r'^get_img_comment/.*$', views.get_img_comment, name='get_img_comment')
 ]

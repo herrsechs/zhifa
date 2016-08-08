@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from account.models import Customer, Barber
 from social.models import Comment
+from img_trans.models import HairImg
 import json
 import logging as log
 # Create your views here.
@@ -103,7 +104,6 @@ def comment(request):
 
 def get_img_comment(request):
     """
-    TO-BE-COMPLETED
     Get comment list of an image
     :param request: JSON string:
                 {string} pid
@@ -126,3 +126,30 @@ def get_img_comment(request):
     jstring = json.dumps(comments)
     return HttpResponse(jstring)
 
+
+def favor_img(request):
+    """
+    For a customer to favor an image
+    :param request: JSON string
+                {string} cid: Customer ID
+                {string} pid: Hair image ID
+    :return:
+    """
+    req = json.loads(request.body)
+    cid = req['cid']
+    pid = req['pid']
+    qs_img = HairImg.objects.filter(id=pid)
+    qs_customer = Customer.objects.filter(id=cid)
+    if qs_img.count() == 0:
+        return HttpResponse("Image " + str(pid) + "does not exist")
+    elif qs_customer.count() == 0:
+        return HttpResponse("Customer " + str(cid) + "does not exist")
+
+    img = qs_img[0]
+    img.favor_count += 1
+    img.save()
+
+    c = qs_customer[0]
+    c.favored_img.add(img)
+    c.save()
+    return HttpResponse("Favor successfully")

@@ -20,6 +20,7 @@ class Customer(models.Model):
     password = models.CharField(max_length=20)
     gender = models.CharField(max_length=1, choices=genders)
     followed_barbers = models.ManyToManyField(Barber)
+    favored_img = models.ManyToManyField(img_models.HairImg)
 
 
 

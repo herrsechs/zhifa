@@ -78,7 +78,7 @@ def get_hair_img(request):
     if qs_img.count() == 0:
         return HttpResponse("Hair image " + pid + "does not exist")
     img_model = qs_img[0]
-    path = img_model.img
+    path = str(img_model.img)
     try:
         with open(path, 'rb') as f:
             return HttpResponse(f.read(), content_type="image/jpeg")

@@ -1,15 +1,8 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django import forms
+import json
 from models import HairImg, HeadImg, SelfieImg
 import logging as log
 # Create your views here.
-
-
-class ImgForm(forms.Form):
-    bid = forms.CharField(label='barber_id')
-    img = forms.ImageField(label='hair_img')
 
 
 def index(request):
@@ -70,3 +63,24 @@ def upload_selfie_img(request):
     si = SelfieImg(cid=cid, img=img)
     si.save()
     return HttpResponse("Upload successfully")
+
+
+def get_hair_img(request):
+    """
+    Get hair image through id
+    :param request: JSON string
+                {string} pid
+    :return:
+    """
+    req = json.loads(request.body)
+    pid = req['pid']
+    qs_img = HairImg.objects.filter(id=pid)
+    if qs_img.count() == 0:
+        return HttpResponse("Hair image " + pid + "does not exist")
+    img_model = qs_img[0]
+    path = img_model.img
+    try:
+        with open(path, 'rb') as f:
+            return HttpResponse(f.read(), content_type="image/jpeg")
+    except IOError:
+        return HttpResponse("Fail to load image")

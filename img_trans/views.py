@@ -71,12 +71,54 @@ def get_hair_img(request):
     :param request: JSON string
                 {string} pid
     :return:
+                HttpResponse(ImageFile)
     """
     req = json.loads(request.body)
     pid = req['pid']
     qs_img = HairImg.objects.filter(id=pid)
     if qs_img.count() == 0:
         return HttpResponse("Hair image " + pid + "does not exist")
+    img_model = qs_img[0]
+    path = str(img_model.img)
+    try:
+        with open(path, 'rb') as f:
+            return HttpResponse(f.read(), content_type="image/jpeg")
+    except IOError:
+        return HttpResponse("Fail to load image")
+
+
+def get_head_img(request):
+    """
+    Get head image through id
+    :param request: JSON string
+                {string} pid
+    :return:
+    """
+    req = json.loads(request.body)
+    pid = req['pid']
+    qs_img = HeadImg.objects.filter(id=pid)
+    if qs_img.count() == 0:
+        return HttpResponse("Head image" + pid + "does not exist")
+    img_model = qs_img[0]
+    path = str(img_model.img)
+    try:
+        with open(path, 'rb') as f:
+            return HttpResponse(f.read(), content_type="image/jpeg")
+    except IOError:
+        return HttpResponse("Fail to load image")
+
+
+def get_selfie_img(request):
+    """
+    Get selfie image through id
+    :param request:
+    :return:
+    """
+    req = json.loads(request.body)
+    pid = req['pid']
+    qs_img = SelfieImg.objects.filter(id=pid)
+    if qs_img.count() == 0:
+        return HttpResponse("Selfie image " + pid + "does not exist")
     img_model = qs_img[0]
     path = str(img_model.img)
     try:

@@ -59,7 +59,7 @@ def upload_selfie_img(request):
     """
 
     cid = request.POST['cid']
-    img = request.FILES.getlist('selfie_img')[0]
+    img = request.FILES.get('selfie_img')
     si = SelfieImg(cid=cid, img=img)
     si.save()
     return HttpResponse("Upload successfully")

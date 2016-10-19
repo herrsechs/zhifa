@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import json
 from models import HairImg, HeadImg, SelfieImg
 import logging as log
+import swap
 # Create your views here.
 
 
@@ -126,3 +127,32 @@ def get_selfie_img(request):
             return HttpResponse(f.read(), content_type="image/jpeg")
     except IOError:
         return HttpResponse("Fail to load image")
+
+def change_face(request):
+    """
+    Change face in two photos
+    :param request:
+    :return:
+    """
+    req = json.loads(request.body)
+    sid = req['selfie_id']
+    hid = req['hair_id']
+
+    qs_s_img = SelfieImg.objects.filter(id=sid)
+    if qs_s_img.count() == 0:
+        return HttpResponse("Selfie image " + pid + "does not exist")
+    s_img_model = qs_s_img[0]
+    s_path = str(s_img_model.img)
+
+    qs_h_img = HairImg.objects.filter(id=hid)
+    if qs_h_img.count() == 0:
+        return HttpResponse("Haircut image " + hid + "does not exist")
+    h_img_model = qs_h_img[0]
+    h_path = str(h_img_model.img)
+
+    o_path = "/home/clouddata/output/1.jpg"
+    swap.wap_face(s_path, h_path, o_path)
+    image = open(o_path, "rb").read()
+    return HttpResponse(image, content_type="image/jpg")
+
+

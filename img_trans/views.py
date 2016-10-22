@@ -150,7 +150,7 @@ def change_face(request):
     h_img_model = qs_h_img[0]
     h_path = str(h_img_model.img)
 
-    o_path = "/home/clouddata/output/1.jpg"
+    o_path = "/home/clouddata/output/output.jpg"
     swap.wap_face(s_path, h_path, o_path)
     image = open(o_path, "rb").read()
     return HttpResponse(image, content_type="image/jpg")

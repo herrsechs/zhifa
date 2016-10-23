@@ -143,12 +143,16 @@ def get_selfie_img(request):
 def change_face(request):
     """
     Change face in two photos
-    :param request:
+    :param request: JSON string
+                {string} sid
+                {string} hid
+                {string} fname
     :return:
     """
     req = json.loads(request.body)
     sid = req['selfie_id']
     hid = req['hair_id']
+    fname = req['file_name']
 
     qs_s_img = SelfieImg.objects.filter(id=sid)
     if qs_s_img.count() == 0:
@@ -162,7 +166,7 @@ def change_face(request):
     h_img_model = qs_h_img[0]
     h_path = str(h_img_model.img)
 
-    o_path = "/home/clouddata/img/output/output.jpg"
+    o_path = "/home/clouddata/img/output/" + fname
     swap.wap_face(h_path, s_path, o_path)
     try:
         image = open(o_path, "rb").read()

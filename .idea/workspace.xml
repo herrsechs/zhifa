@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="517bf78c-9c10-4478-bd54-7575f0c5b611" name="Default" comment="Change output file path">
+    <list default="true" id="517bf78c-9c10-4478-bd54-7575f0c5b611" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img_trans/models.py" afterPath="$PROJECT_DIR$/img_trans/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img_trans/views.py" afterPath="$PROJECT_DIR$/img_trans/views.py" />
     </list>
     <ignored path="zhifa.iws" />
@@ -37,8 +36,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/img_trans/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1386">
-              <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+            <state relative-caret-position="118">
+              <caret line="148" column="30" selection-start-line="148" selection-start-column="30" selection-end-line="148" selection-end-column="30" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -468,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477113379063</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add gender and type field to HairImg model">
+      <created>1477191944581</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1477191944581</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -513,7 +519,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add change face function" />
     <MESSAGE value="Change output file path" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change output file path" />
+    <MESSAGE value="Add gender and type field to HairImg model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add gender and type field to HairImg model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -809,8 +816,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/img_trans/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1386">
-          <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+        <state relative-caret-position="118">
+          <caret line="148" column="30" selection-start-line="148" selection-start-column="30" selection-end-line="148" selection-end-column="30" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>

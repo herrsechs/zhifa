@@ -15,6 +15,8 @@ def upload_hair_img(request):
     For a barber to upload a haircut image
     :param request: form-data
                 {string} barber_id
+                {string} type
+                {string} gender
                 {file} hair_img
     :return: HttpResponse("Uploaded successfully")
     """
@@ -24,9 +26,13 @@ def upload_hair_img(request):
 
     bid = request.POST['barber_id']
     img = request.FILES.getlist('hair_img')[0]
-    hi = HairImg(bid=bid, img=img, favor_count=0)
-    # Try/Catch need to be added
-    hi.save()
+    type = request.POST['type']
+    gender = request.POST['gender']
+    hi = HairImg(bid=bid, img=img, favor_count=0, type=type, gender=gender)
+    try:
+        hi.save()
+    except IOError:
+        return HttpResponse("Failed to save it in server")
 
     # logger.debug(hi)
     return HttpResponse("Upload successfully")
@@ -46,7 +52,10 @@ def upload_head_img(request):
     role = request.POST['role']
     img = request.FILES.getlist('head_img')[0]
     hi = HeadImg(user_id=uid, role=role, img=img)
-    hi.save()
+    try:
+        hi.save()
+    except IOError:
+        return HttpResponse("Failed to save it in server")
     return HttpResponse("Upload successfully")
 
 
@@ -62,7 +71,10 @@ def upload_selfie_img(request):
     cid = request.POST['cid']
     img = request.FILES.get('selfie_img')
     si = SelfieImg(cid=cid, img=img)
-    si.save()
+    try:
+        si.save()
+    except IOError:
+        return HttpResponse("Failed to save it in server")
     return HttpResponse("Upload successfully")
 
 
@@ -151,7 +163,7 @@ def change_face(request):
     h_path = str(h_img_model.img)
 
     o_path = "/home/clouddata/img/output/output.jpg"
-    swap.wap_face(s_path, h_path, o_path)
+    swap.wap_face(h_path, s_path, o_path)
     try:
         image = open(o_path, "rb").read()
     except IOError:

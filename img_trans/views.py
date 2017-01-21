@@ -156,7 +156,7 @@ def change_face(request):
 
     qs_s_img = SelfieImg.objects.filter(id=sid)
     if qs_s_img.count() == 0:
-        return HttpResponse("Selfie image " + pid + "does not exist")
+        return HttpResponse("Selfie image " + sid + "does not exist")
     s_img_model = qs_s_img[0]
     s_path = str(s_img_model.img)
 

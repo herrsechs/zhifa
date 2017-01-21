@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^img/', include('img_trans.urls')),
     url(r'^account/', include('account.urls')),
     url(r'^social/', include('social.urls')),
+    url(r'^barber/', include('barber.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]

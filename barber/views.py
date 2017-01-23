@@ -19,7 +19,7 @@ def get_trend_items(request):
     trend_items = []
     number = 1
     for hair_img in hair_imgs:
-        item = TrendItems()
+        item = {'number': 0, 'favor_count': 0, 'barber_name': None, 'hair_img_id': None}
 
         item.number = number
         number += 1

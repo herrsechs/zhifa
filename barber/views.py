@@ -29,6 +29,6 @@ def get_trend_items(request):
 
         trend_items.append(item)
 
-    json_str = json.dump(trend_items)
+    json_str = json.dumps(trend_items)
     return HttpResponse(json_str)
 

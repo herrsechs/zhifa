@@ -21,11 +21,11 @@ def get_trend_items(request):
     for hair_img in hair_imgs:
         item = {'number': 0, 'favor_count': 0, 'barber_name': None, 'hair_img_id': None}
 
-        item.number = number
+        item['number'] = number
         number += 1
-        item.favor_count = hair_img.favor_count
-        item.hair_img_id = hair_img.id
-        item.barber_name = Barber.objects.filter(id=hair_img.bid)[0].username
+        item['favor_count'] = hair_img.favor_count
+        item['hair_img_id'] = hair_img.id
+        item['barber_name'] = Barber.objects.filter(id=hair_img.bid)[0].username
 
         trend_items.append(item)
 

@@ -27,8 +27,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/img_trans/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+            <state relative-caret-position="486">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -487,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485147483587</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Modify image upload function.&#10;Add empty variant detection.">
+      <created>1486116010464</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1486116010464</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -535,7 +542,8 @@
     <MESSAGE value="Modify barber get trend items function.&#10;" />
     <MESSAGE value="Change item from object to dict in order to dump it into json&#10;" />
     <MESSAGE value="Modify dict usage problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify dict usage problem" />
+    <MESSAGE value="Modify image upload function.&#10;Add empty variant detection." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify image upload function.&#10;Add empty variant detection." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -883,8 +891,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/img_trans/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+        <state relative-caret-position="486">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>

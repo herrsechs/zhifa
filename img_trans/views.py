@@ -27,6 +27,9 @@ def upload_hair_img(request):
     bid = request.POST['barber_id']
     img = request.FILES.getlist('hair_img')[0]
     if ~img:
+        img = request.FILES['hair_img']
+
+    if ~img:
         return HttpResponse("Image can't be none")
 
     img_type = request.POST['type']

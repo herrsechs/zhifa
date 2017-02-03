@@ -26,9 +26,12 @@ def upload_hair_img(request):
 
     bid = request.POST['barber_id']
     img = request.FILES.getlist('hair_img')[0]
-    type = request.POST['type']
+    if ~img:
+        return HttpResponse("Image can't be none")
+
+    img_type = request.POST['type']
     gender = request.POST['gender']
-    hi = HairImg(bid=bid, img=img, favor_count=0, type=type, gender=gender)
+    hi = HairImg(bid=bid, img=img, favor_count=0, type=img_type, gender=gender)
     try:
         hi.save()
     except IOError:

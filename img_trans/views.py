@@ -71,7 +71,9 @@ def upload_selfie_img(request):
     :param request: form-data
                 {string} cid
                 {file} image
-    :return:
+    :return: json
+                {int} hid
+                {int} sid
     """
 
     cid = request.POST['cid']
@@ -81,7 +83,9 @@ def upload_selfie_img(request):
         si.save()
     except IOError:
         return HttpResponse("Failed to save it in server")
-    return HttpResponse("Upload successfully")
+    item = {"HAIRCUT": 124, "SELFIE": si.id}
+    json_str = json.dumps(item)
+    return HttpResponse(json_str)
 
 
 def get_hair_img(request):

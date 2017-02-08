@@ -32,3 +32,15 @@ def get_trend_items(request):
     json_str = json.dumps(trend_items)
     return HttpResponse(json_str)
 
+
+def get_barber_haircut_gallery(request):
+    bid = request['barber_id']
+    hair_imgs = HairImg.objects.filter(bid=bid)[0:8]
+    hair_items = []
+    for hair_img in hair_imgs:
+        item = {'hair_id': hair_img.id}
+        hair_items.append(item)
+
+    json_str = json.dumps(hair_items)
+    return HttpResponse(json_str)
+

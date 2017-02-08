@@ -34,7 +34,8 @@ def get_trend_items(request):
 
 
 def get_barber_haircut_gallery(request):
-    bid = request.POST['barber_id']
+    req = json.loads(request.body)
+    bid = req['barber_id']
     hair_imgs = HairImg.objects.filter(bid=bid)[0:8]
     hair_items = []
     for hair_img in hair_imgs:

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from account.models import Customer, Barber
 from social.models import Comment
+from social.models import Message
 from img_trans.models import HairImg
 import json
 import logging as log
@@ -153,3 +154,54 @@ def favor_img(request):
     c.favored_img.add(img)
     c.save()
     return HttpResponse("Favor successfully")
+
+
+def upload_barber_message(request):
+    """
+    For a barber to leave a message to his fans
+    :param request: JSON string
+                {string} bid: barber id
+                {string} text: message text
+    :return:
+    """
+    req = json.loads(request.body)
+    bid = req['bid']
+    text = req['text']
+    msg = Message(bid=bid, text=text)
+    try:
+        msg.save()
+    except IOError:
+        return HttpResponse("Failed to save it in server")
+    return HttpResponse("Uploaded successfully!")
+
+
+def get_customer_message(request):
+    """
+    For a customer to get messages leaved by barber
+    :param request: JSON string
+                {string} cid: Customer id
+    :return:
+    """
+    req = json.loads(request.body)
+    cid = req['cid']
+    qs_customer = Customer.objects.filter(id=cid)
+    if qs_customer.count() == 0:
+        return HttpResponse("customer " + cid + " not exist")
+    c = qs_customer[0]
+
+    qs_barber = c.followed_barbers.all()
+    if qs_barber.count() == 0:
+        return HttpResponse("no followed barber")
+
+    msg_list = []
+    for b in qs_barber:
+        msgs = Message.objects.filter(bid=b.id)
+        for msg in msgs:
+            item = dict()
+            item['barber_id'] = b.id
+            item['barber_name'] = b.username
+            item['text'] = msg.text
+            msg_list.append(item)
+
+    json_str = json.dumps(msg_list)
+    return HttpResponse(json_str)

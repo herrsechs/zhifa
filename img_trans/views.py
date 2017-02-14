@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 import json
+import random
 from models import HairImg, HeadImg, SelfieImg
 import logging as log
 import swap
@@ -149,6 +150,15 @@ def get_selfie_img(request):
             return HttpResponse(f.read(), content_type="image/jpeg")
     except IOError:
         return HttpResponse("Fail to load image")
+
+
+def get_recommended_haircuts(request):
+    req = json.loads(request.body)
+    cid = req['cid']
+    hids = random.sample(range(1, 100), 8)
+    json_arr = json.dumps(hids)
+    return HttpResponse(json_arr)
+
 
 def change_face(request):
     """

@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^get_hair_img/.*$', views.get_hair_img, name='get_hair_img'),
     url(r'^get_head_img/.*$', views.get_head_img, name='get_head_img'),
     url(r'^get_selfie_img/.*$', views.get_selfie_img, name='get_selfie_img'),
+    url(r'^get_recommended_haircuts/.*$', views.get_recommended_haircuts,
+        name='get_recommended_haircuts'),
     url(r'^change_face/.*$', views.change_face, name='change_face')
 ]

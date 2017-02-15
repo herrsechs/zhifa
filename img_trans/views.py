@@ -160,6 +160,44 @@ def get_recommended_haircuts(request):
     return HttpResponse(json_arr)
 
 
+def get_search_result(request):
+    """
+    Get haircut ids for a certain search entry
+    :param request: JSON string
+                {string} gender
+                {string} hair_len
+    :return: JSON array
+    """
+    req = json.loads(request.body)
+    gender = req['gender']
+    hair_len = req['hair_len']
+    hids = []
+    if gender != '' and hair_len != '':
+        qs_img = HairImg.objects.filter(gender=gender)
+        if qs_img.count() == 0:
+            return HttpResponse("No match result")
+        for q in qs_img:
+            if q.type == hair_len:
+                hids.append(q.id)
+    elif gender != '':
+        qs_img = HairImg.objects.filter(gender=gender)
+        if qs_img.count() == 0:
+            return HttpResponse("No match result")
+        for q in qs_img:
+            hids.append(q.id)
+    elif hair_len != '':
+        qs_img = HairImg.objects.filter(type=hair_len)
+        if qs_img.count() == 0:
+            return HttpResponse("No match result")
+        for q in qs_img:
+            hids.append(q.id)
+
+    if len(hids) > 6:
+        hids = random.sample(hids, 6)
+    json_str = json.dumps(hids)
+    return HttpResponse(json_str)
+
+
 def change_face(request):
     """
     Change face in two photos

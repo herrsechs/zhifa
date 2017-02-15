@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^get_selfie_img/.*$', views.get_selfie_img, name='get_selfie_img'),
     url(r'^get_recommended_haircuts/.*$', views.get_recommended_haircuts,
         name='get_recommended_haircuts'),
+    url(r'^get_search_result/.*$', views.get_search_result, name='get_search_result'),
     url(r'^change_face/.*$', views.change_face, name='change_face')
 ]

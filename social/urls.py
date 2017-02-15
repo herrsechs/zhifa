@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^comment/.*$', views.comment, name='comment'),
     url(r'^get_img_comment/.*$', views.get_img_comment, name='get_img_comment'),
     url(r'^favor_img/.*$', views.favor_img, name='favor_img'),
+    url(r'^get_favored_images/.*$', views.get_favored_images, name='get_favored_images'),
     url(r'^upload_barber_message/.*$', views.upload_barber_message, name='upload_barber_message'),
     url(r'^get_customer_message/.*$', views.get_customer_message, name='get_customer_message')
 ]

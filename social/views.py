@@ -156,6 +156,32 @@ def favor_img(request):
     return HttpResponse("Favor successfully")
 
 
+def get_favored_images(request):
+    """
+    For a customer to get all the images favored by him
+    :param request: JSON string
+                {string} cid: Customer ID
+    :return:
+    """
+    req = json.loads(request.body)
+    cid = req['cid']
+    qs_customer = Customer.objects.filter(id=cid)
+    if qs_customer.count() == 0:
+        return HttpResponse("customer " + cid + " not exist")
+    c = qs_customer[0]
+
+    qs_images = c.favored_img.all()
+    if qs_images.count() == 0:
+        return HttpResponse("No favored images")
+
+    hids = []
+    for q in qs_images:
+        hids.append(q.id)
+
+    json_str = json.dumps(hids)
+    return HttpResponse(json_str)
+
+
 def upload_barber_message(request):
     """
     For a barber to leave a message to his fans

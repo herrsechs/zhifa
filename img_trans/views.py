@@ -238,7 +238,7 @@ def get_haircut_info(request):
     is_followed = False
     is_favored = True
 
-    followed_barbers = c.folloed_barbers.all()
+    followed_barbers = c.followed_barbers.all()
     favored_imgs = c.favored_img.all()
 
     for fb in followed_barbers:

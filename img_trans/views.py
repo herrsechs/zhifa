@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import json
 import random
 from models import HairImg, HeadImg, SelfieImg
+from account.models import Customer, Barber
 import logging as log
 import swap
 # Create your views here.
@@ -196,6 +197,68 @@ def get_search_result(request):
         hids = random.sample(hids, 6)
     json_str = json.dumps(hids)
     return HttpResponse(json_str)
+
+
+def get_haircut_info(request):
+    """
+    Get pic info according to haircut id and customer id
+    :param request: JSON string
+                {string} hid
+                {string} cid
+    :return: JSON string
+                {string} bid
+                {int} favor_count
+                {string} barber_name
+                {boolean} is_followed
+                {boolean} is_favored
+    """
+    req = json.loads(request.body)
+    hid = req['hid']
+    cid = req['cid']
+
+    qs_img = HairImg.objects.filter(id=hid)
+    if qs_img.count() == 0:
+        return HttpResponse("No match haircut image")
+    img = qs_img[0]
+
+    qs_customer = Customer.objects.filter(id=cid)
+    if qs_customer.count() == 0:
+        return HttpResponse("No match customer")
+    c = qs_customer[0]
+
+    bid = img.bid
+    favor_count = img.favor_count
+
+    qs_barber = Barber.objects.filter(id=bid)
+    if qs_barber.count() == 0:
+        return HttpResponse("No match barber")
+    b = qs_barber[0]
+
+    b_name = b.username
+    is_followed = False
+    is_favored = True
+
+    followed_barbers = c.folloed_barbers.all()
+    favored_imgs = c.favored_img.all()
+
+    for fb in followed_barbers:
+        if fb.id == bid:
+            is_followed = True
+            break
+
+    for fi in favored_imgs:
+        if fi.id == hid:
+            is_favored = True
+            break
+
+    result = dict()
+    result['bid'] = bid
+    result['favor_count'] = favor_count
+    result['barber_name'] = b_name
+    result['is_followed'] = is_followed
+    result['is_favored'] = is_favored
+    info_str = json.dumps(result)
+    return HttpResponse(info_str)
 
 
 def change_face(request):

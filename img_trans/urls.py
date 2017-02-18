@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^get_recommended_haircuts/.*$', views.get_recommended_haircuts,
         name='get_recommended_haircuts'),
     url(r'^get_search_result/.*$', views.get_search_result, name='get_search_result'),
+    url(r'^get_haircut_info/.*$', views.get_haircut_info, name='get_haircut_info'),
     url(r'^change_face/.*$', views.change_face, name='change_face')
 ]

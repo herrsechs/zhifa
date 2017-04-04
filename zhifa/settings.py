@@ -129,4 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../zhifa-admin').replace('\\', '/')
+STATIC_URL = '.'
+STATICFILES_DIRS = (
+    ('css', os.path.join(STATIC_ROOT, 'css').replace('\\', '/')),
+    ('js', os.path.join(STATIC_ROOT, 'js').replace('\\', '/')),
+    ('fonts', os.path.join(STATIC_ROOT, 'fonts').replace('\\', '/')),
+    ('tables', os.path.join(STATIC_ROOT, 'tables').replace('\\', '/'))
+)

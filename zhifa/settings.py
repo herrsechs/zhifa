@@ -58,6 +58,8 @@ INSTALLED_APPS = (
     'img_trans',
     'account',
     'social',
+    'zhifa-admin',
+    'barber'
 )
 
 MIDDLEWARE_CLASSES = (

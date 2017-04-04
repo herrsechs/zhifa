@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^social/', include('social.urls')),
     url(r'^barber/', include('barber.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^zhifa-admin/', include('zhifa-admin.urls'))
 ]

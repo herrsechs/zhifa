@@ -78,6 +78,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, '../zhifa-test').replace('\\', '/'),
+            os.path.join(BASE_DIR, '../../zhifa-admin').replace('\\', '/')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
